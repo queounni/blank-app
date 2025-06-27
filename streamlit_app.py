@@ -103,32 +103,32 @@ def to_excel(df):
     return processed_data
 
 def main():
-    st.title('海尔消金数据处理系统')
+    st.title('excel转换小工具-月计划')
     
     try:
-        st.header('渠道与资方预览')
+        st.header('渠道与资方信息内置，如更新请沟通')
         dim_file = pd.ExcelFile('./渠道维表.xlsx')
         data_2 = dim_file.parse('渠道')
         data_3 = dim_file.parse('资方')
         # st.success('渠道维表读取成功！')
         
         # 上传月计划数据
-        st.header('上传月计划数据')
+        st.header('上传月计划')
         data_1_file = st.file_uploader('月计划数据', type=['xlsx', 'xls'])
         
         if data_1_file:
             data_1 = pd.read_excel(data_1_file, sheet_name='月计划')
-            st.success('月计划数据读取成功！')
+            st.success('读取成功')
             
-            if st.button('开始处理数据'):
-                with st.spinner('数据处理中...'):
+            if st.button('处理'):
+                with st.spinner('处理中...'):
                     final_df = process_data(data_1, data_2, data_3)
                 
-                st.success('数据处理完成！')
+                st.success('完成！')
                 st.dataframe(final_df)
                 
                 # 下载结果（使用恢复的to_excel函数）
-                st.header('下载处理结果')
+                st.header('下载结果')
                 excel_file = to_excel(final_df)
                 st.download_button(
                     label='下载Excel文件',
