@@ -103,10 +103,9 @@ def to_excel(df):
     return processed_data
 
 def main():
-    st.title('excel转换小工具-月计划')
+    st.title('EXCEL 小工具-月计划')
     
     try:
-        st.header('渠道与资方信息内置，如更新请沟通')
         dim_file = pd.ExcelFile('./渠道维表.xlsx')
         data_2 = dim_file.parse('渠道')
         data_3 = dim_file.parse('资方')
@@ -128,7 +127,7 @@ def main():
                 st.dataframe(final_df)
                 
                 # 下载结果（使用恢复的to_excel函数）
-                st.header('下载结果')
+                st.header('下载')
                 excel_file = to_excel(final_df)
                 st.download_button(
                     label='下载Excel文件',
